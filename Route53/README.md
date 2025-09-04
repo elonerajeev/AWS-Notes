@@ -1,8 +1,3 @@
-Here's a **comprehensive guide** to **AWS Route 53**, including both **theory and practical implementation**:
-
----
-
-```markdown
 # 🌍 **AWS Route 53: Comprehensive Guide** 🛠️
 
 ## 🔥 **Introduction to AWS Route 53**
