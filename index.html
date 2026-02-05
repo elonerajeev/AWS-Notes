@@ -1,254 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS Notes - Complete Guide</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS Notes | Cloud Learning Hub</title>
+  <meta name="description" content="AWS Notes: visual, structured learning hub for AWS services, workflows, and deployment projects." />
+  <style>
+    :root {
+      --bg-1: #080c19;
+      --bg-2: #121a34;
+      --panel: #111a30;
+      --panel-soft: #0f1730;
+      --text: #e9efff;
+      --muted: #9fb0d6;
+      --line: rgba(255,255,255,.12);
+      --brand: #57b6ff;
+      --brand-2: #8f7fff;
+      --ok: #44d49a;
+      --warn: #ffd166;
+      --shadow: 0 14px 38px rgba(0,0,0,.33);
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 10%, rgba(87,182,255,.22), transparent 30%),
+        radial-gradient(circle at 90% 0%, rgba(143,127,255,.2), transparent 28%),
+        linear-gradient(140deg, var(--bg-1), var(--bg-2));
+      min-height: 100vh;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .container { max-width: 1180px; margin: 0 auto; padding: 22px; }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(8,12,25,.7);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .nav .brand { font-weight: 800; letter-spacing: .2px; }
+    .nav a { color: var(--muted); text-decoration: none; margin-left: 14px; font-weight: 600; }
+    .nav a:hover { color: var(--text); }
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      background: linear-gradient(135deg, rgba(87,182,255,.14), rgba(143,127,255,.14));
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -120px -120px auto;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(143,127,255,.26), transparent 68%);
+      z-index: -1;
+    }
 
-        .header p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 20px;
-        }
+    .hero h1 { margin: 0; font-size: clamp(2rem, 3.8vw, 3.2rem); }
+    .hero p { margin: 10px 0 0; color: var(--muted); max-width: 800px; }
 
-        .github-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #24292e;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
+    .chips { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: #dbe6ff;
+      font-size: .9rem;
+      background: rgba(255,255,255,.04);
+    }
 
-        .github-link:hover {
-            transform: translateY(-2px);
-        }
+    .actions { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+    }
+    .btn.alt { background: #1a2547; }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
+    h2.section-title { margin: 28px 0 12px; font-size: 1.3rem; }
 
-        .service-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+    }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .stat b { font-size: 1.35rem; display: block; }
+    .stat span { color: var(--muted); }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
+    .workflow {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      padding: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+      gap: 10px;
+    }
+    .step {
+      border: 1px dashed rgba(255,255,255,.18);
+      border-radius: 12px;
+      padding: 10px;
+      background: rgba(255,255,255,.02);
+      font-size: .94rem;
+    }
 
-        .service-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .filter-btn {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: #132042;
+      color: #dce5ff;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-weight: 600;
+    }
+    .filter-btn.active { background: linear-gradient(90deg, var(--brand), var(--brand-2)); }
 
-        .service-icon {
-            font-size: 2.5rem;
-            padding: 15px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 15px;
-            color: white;
-        }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .card:hover { transform: translateY(-3px); border-color: rgba(87,182,255,.6); }
+    .meta { color: var(--muted); font-size: .86rem; }
+    .card h3 { margin: 6px 0; }
+    .card p { margin: 0 0 8px; color: var(--muted); }
+    .card a { color: var(--brand); text-decoration: none; font-weight: 700; }
 
-        .service-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #333;
-        }
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+    }
 
-        .service-description {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+    }
 
-        .features-list {
-            list-style: none;
-            margin-bottom: 20px;
-        }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: rgba(255,255,255,.02);
+    }
+    summary { cursor: pointer; font-weight: 700; }
 
-        .features-list li {
-            padding: 5px 0;
-            color: #555;
-        }
+    footer {
+      margin: 22px 0 10px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: #0f1730;
+    }
 
-        .features-list li::before {
-            content: "✅ ";
-            color: #4CAF50;
-            font-weight: bold;
-        }
-
-        .view-guide-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: transform 0.3s ease;
-        }
-
-        .view-guide-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 60px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
-    </style>
+    @media (max-width: 880px) {
+      .content-grid { grid-template-columns: 1fr; }
+      .nav { position: static; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🚀 AWS Notes</h1>
-            <p>Complete AWS Services Documentation & Guides</p>
-            <a href="https://github.com/elonerajeev/AWS-Notes" class="github-link" target="_blank">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                View on GitHub
-            </a>
-        </div>
+  <div class="container">
+    <nav class="nav">
+      <div class="brand">☁️ AWS Notes</div>
+      <div>
+        <a href="#services">Services</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="README.md">README</a>
+      </div>
+    </nav>
 
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-icon">🌐</div>
-                    <h2 class="service-title">Amazon CloudFront</h2>
-                </div>
-                <p class="service-description">
-                    Complete guide to Amazon CloudFront CDN service for accelerating web content delivery globally.
-                </p>
-                <ul class="features-list">
-                    <li>Step-by-step setup guide</li>
-                    <li>Security & HTTPS configuration</li>
-                    <li>Performance optimization</li>
-                    <li>Pricing breakdown</li>
-                    <li>Real-world use cases</li>
-                </ul>
-                <a href="https://github.com/elonerajeev/AWS-Notes/tree/main/Amazon%20CloudFront" class="view-guide-btn" target="_blank">
-                    View CloudFront Guide
-                </a>
-            </div>
+    <header class="hero">
+      <h1>Learn AWS in a Clear, Practical, and Visual Way</h1>
+      <p>From IAM to EKS, from static website hosting to dynamic app deployment, this repository helps you move from beginner concepts to production-style cloud workflows.</p>
+      <div class="chips">
+        <span class="chip">Beginner → Advanced</span>
+        <span class="chip">Service-wise Notes</span>
+        <span class="chip">Architecture Diagrams</span>
+        <span class="chip">Deployment Projects</span>
+      </div>
+      <div class="actions">
+        <a class="btn" href="README.md">Open Full README</a>
+        <a class="btn alt" target="_blank" href="https://github.com/elonerajeev/AWS-Notes">View on GitHub</a>
+      </div>
+    </header>
 
-            <div class="service-card">
-                <div class="service-header">
-                    <div class="service-icon">🗄️</div>
-                    <h2 class="service-title">Amazon Redshift</h2>
-                </div>
-                <p class="service-description">
-                    Comprehensive documentation for Amazon Redshift data warehouse service and big data analytics.
-                </p>
-                <ul class="features-list">
-                    <li>Architecture deep dive</li>
-                    <li>Performance optimization</li>
-                    <li>Security best practices</li>
-                    <li>AWS integrations</li>
-                    <li>Cost optimization</li>
-                </ul>
-                <a href="https://github.com/elonerajeev/AWS-Notes/tree/main/Amazon%20Redshif" class="view-guide-btn" target="_blank">
-                    View Redshift Guide
-                </a>
-            </div>
-        </div>
+    <h2 class="section-title">Repository Snapshot</h2>
+    <section class="stats">
+      <article class="stat"><b>25+</b><span>Topics & service folders</span></article>
+      <article class="stat"><b>3</b><span>Guided learning paths</span></article>
+      <article class="stat"><b>10+</b><span>Core AWS service domains</span></article>
+      <article class="stat"><b>Visual-first</b><span>Diagrams + workflows + projects</span></article>
+    </section>
 
-        <div class="footer">
-            <p>📚 Comprehensive AWS Documentation by <strong>elonerajeev</strong></p>
-            <p>⭐ Star the repository if you find it helpful!</p>
-        </div>
+    <h2 id="workflow" class="section-title">End-to-End AWS Workflow (Quick View)</h2>
+    <section class="workflow">
+      <div class="step"><b>1) Secure access</b><br/><span class="meta">IAM users, roles, policies</span></div>
+      <div class="step"><b>2) Build network</b><br/><span class="meta">VPC, subnet, routes, SGs</span></div>
+      <div class="step"><b>3) Deploy compute</b><br/><span class="meta">EC2/ECS/EKS/Lambda</span></div>
+      <div class="step"><b>4) Add data layer</b><br/><span class="meta">RDS/DynamoDB + storage</span></div>
+      <div class="step"><b>5) Expose safely</b><br/><span class="meta">ELB + Route 53 + CloudFront</span></div>
+      <div class="step"><b>6) Observe + automate</b><br/><span class="meta">CloudWatch + CI/CD + IaC</span></div>
+    </section>
+
+    <h2 id="services" class="section-title">Service Guides</h2>
+    <div class="filter-row" aria-label="service-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="security">Security</button>
+      <button class="filter-btn" data-filter="compute">Compute</button>
+      <button class="filter-btn" data-filter="storage">Storage</button>
+      <button class="filter-btn" data-filter="networking">Networking</button>
+      <button class="filter-btn" data-filter="devops">DevOps / IaC</button>
     </div>
 
-    <script>
-        // Add smooth scrolling and animations
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate cards on scroll
-            const cards = document.querySelectorAll('.service-card');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            });
+    <section class="cards" id="cards">
+      <article class="card" data-category="security"><div class="meta">Security</div><h3>🔐 IAM</h3><p>Identity, policy and role-based access controls.</p><a href="IAM/README.md">Open Guide →</a></article>
+      <article class="card" data-category="compute"><div class="meta">Compute</div><h3>🖥️ EC2</h3><p>Instances, scaling basics, operations and practical setup.</p><a href="EC2/README.md">Open Guide →</a></article>
+      <article class="card" data-category="storage"><div class="meta">Storage</div><h3>🪣 S3</h3><p>Object storage, lifecycle, static hosting and permissions.</p><a href="S3/README.md">Open Guide →</a></article>
+      <article class="card" data-category="networking"><div class="meta">Networking</div><h3>🌐 VPC</h3><p>Subnets, endpoints, peering and traffic design.</p><a href="VPC/README.md">Open Guide →</a></article>
+      <article class="card" data-category="compute"><div class="meta">Compute</div><h3>⚡ Lambda</h3><p>Serverless functions with event-driven patterns.</p><a href="Lambda%20Function/README.md">Open Guide →</a></article>
+      <article class="card" data-category="networking"><div class="meta">Networking</div><h3>🚦 Route 53 + CloudFront</h3><p>DNS routing and global edge delivery setup.</p><a href="Route53/README.md">Open Guide →</a></article>
+      <article class="card" data-category="compute"><div class="meta">Containers</div><h3>📦 ECS / EKS</h3><p>Run containers using Fargate or Kubernetes.</p><a href="ECS/README.md">Open Guide →</a></article>
+      <article class="card" data-category="devops"><div class="meta">DevOps</div><h3>🚀 CodePipeline</h3><p>Automated build/test/deploy delivery workflows.</p><a href="CodePipeline/README.md">Open Guide →</a></article>
+      <article class="card" data-category="devops"><div class="meta">IaC</div><h3>🏗️ Terraform + CloudFormation</h3><p>Provision, version and review infrastructure code.</p><a href="TERRAFORM/terraform.md">Open Guide →</a></article>
+      <article class="card" data-category="storage"><div class="meta">Database</div><h3>🗄️ RDS / DynamoDB</h3><p>Managed SQL and NoSQL workload patterns.</p><a href="RDS/README.md">Open Guide →</a></article>
+    </section>
 
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
-            });
+    <h2 id="roadmap" class="section-title">Learning Roadmap + Suggested Next Topics</h2>
+    <section class="content-grid">
+      <article class="panel">
+        <h3 style="margin-top:0;">3-Stage Learning Strategy</h3>
+        <ol>
+          <li><b>Foundation:</b> PRE, IAM, EC2, S3, VPC</li>
+          <li><b>Build:</b> RDS, Lambda, Route 53, CloudFront</li>
+          <li><b>Scale:</b> ECS/EKS, CI/CD, Terraform, CloudFormation</li>
+        </ol>
+        <p class="meta">Tip: complete one deployment mini-project after each stage to retain concepts better.</p>
+      </article>
+
+      <aside class="panel">
+        <h3 style="margin-top:0;">High-Impact Additions</h3>
+        <ul style="margin:0; color:var(--muted); padding-left: 18px;">
+          <li>AWS Organizations</li>
+          <li>Control Tower</li>
+          <li>API Gateway patterns</li>
+          <li>Security Hub + GuardDuty</li>
+          <li>FinOps / cost optimization</li>
+        </ul>
+      </aside>
+    </section>
+
+    <h2 class="section-title">FAQ</h2>
+    <section>
+      <details>
+        <summary>How should I start if I am completely new?</summary>
+        Start from PRE → IAM → EC2 → S3 → VPC and build a basic deployment project immediately.
+      </details>
+      <details>
+        <summary>Can I use this for interview preparation?</summary>
+        Yes. Use each service README as revision material and focus on architecture trade-offs and workflow sections.
+      </details>
+      <details>
+        <summary>Is this GitHub Pages ready?</summary>
+        Yes. Keep this file at repo root and enable Pages in repository settings.
+      </details>
+    </section>
+
+    <footer>
+      Built to make AWS learning faster, visual, and practical. ⭐ If this helps, star the repository.
+    </footer>
+  </div>
+
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const selected = btn.dataset.filter;
+
+        cards.forEach(card => {
+          const category = card.dataset.category;
+          const show = selected === 'all' || category === selected;
+          card.style.display = show ? 'block' : 'none';
         });
-    </script>
+      });
+    });
+  </script>
 </body>
 </html>
