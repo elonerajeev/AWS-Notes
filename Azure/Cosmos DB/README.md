@@ -1,0 +1,96 @@
+# 🌌 Azure Cosmos DB
+
+This Azure guide explains **🌌 Azure Cosmos DB** as a practical Azure service topic: core concepts, how it works, deployment steps, security choices, operations, and best practices. Azure Cosmos DB is a globally distributed NoSQL database with multiple APIs, low-latency reads/writes, automatic indexing, and tunable consistency.
+
+---
+
+## Table of Contents
+
+1. Azure service overview
+2. Core concepts
+3. Hands-on getting started
+4. Common architecture patterns
+5. Security and operations best practices
+6. Azure CLI quick commands
+7. AWS-to-Azure terminology
+8. Helpful links
+
+---
+
+## 1. Azure service overview
+
+- **Azure service:** Azure Cosmos DB for NoSQL and compatible APIs
+- **What it does:** Azure Cosmos DB is a globally distributed NoSQL database with multiple APIs, low-latency reads/writes, automatic indexing, and tunable consistency.
+- **AWS translation note:** Comparable AWS topic: Amazon DynamoDB
+
+## 2. Core concepts
+
+- APIs for NoSQL, MongoDB, Cassandra, Gremlin, Table, and PostgreSQL scenarios
+- Global distribution with multi-region writes and failover
+- Provisioned throughput, autoscale throughput, and serverless capacity modes
+- Consistency levels from strong to eventual depending on application needs
+
+## 3. Hands-on getting started
+
+1. Choose API, partition key, and capacity mode.
+2. Create account, database, and container.
+3. Load sample documents and query them.
+4. Configure indexing, TTL, backups, and multi-region replication.
+
+## 4. Common architecture patterns
+
+- **Beginner lab:** Deploy a small resource in a dedicated resource group, tag it, monitor it, and delete it after practice.
+- **Production baseline:** Use separate subscriptions or resource groups for dev, test, and production; apply Azure Policy; deploy with infrastructure as code.
+- **High availability:** Prefer availability zones or zone-redundant services when the region supports them.
+- **Private access:** Use private endpoints, VNets, private DNS, and managed identities when the workload should not be exposed publicly.
+- **Cost control:** Use budgets, alerts, reservations or savings plans where appropriate, and right-size resources continuously.
+
+## 5. Security and operations best practices
+
+- Design partition keys carefully to avoid hot partitions.
+- Use autoscale or serverless for variable workloads.
+- Model items around query patterns.
+- Monitor RU consumption, throttling, and request latency.
+
+## 6. Azure CLI quick commands
+
+```bash
+# Login and select a subscription
+az login
+az account set --subscription "<subscription-id>"
+
+# Create a resource group for practice
+az group create --name rg-learning-azure --location eastus
+
+# List resources in the group
+az resource list --resource-group rg-learning-azure --output table
+
+# Clean up practice resources when finished
+az group delete --name rg-learning-azure --yes --no-wait
+```
+
+## 7. AWS-to-Azure terminology
+
+| AWS term | Azure term |
+|---|---|
+| Account | Tenant + subscription |
+| Region | Region |
+| Availability Zone | Availability Zone |
+| IAM policy | Azure RBAC role assignment / Azure Policy |
+| Security Group | Network Security Group |
+| VPC | Virtual Network |
+| CloudWatch | Azure Monitor |
+| CloudFormation | ARM template / Bicep |
+
+## Azure-first deep dive
+
+Cosmos DB design starts with the API model, partition key, consistency level, and throughput mode. The partition key determines scalability and cost efficiency, so choose a high-cardinality key that spreads reads and writes evenly. Request Units measure database work; poor queries or hot partitions cause throttling.
+
+Use autoscale or serverless for variable workloads, TTL for automatic cleanup, integrated cache for read-heavy apps, and multi-region writes only when the application can handle conflict resolution.
+
+## 8. Helpful links
+
+- [Microsoft Azure documentation](https://learn.microsoft.com/azure/)
+- [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
+- [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
+- [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
