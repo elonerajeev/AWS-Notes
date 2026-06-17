@@ -30,3 +30,16 @@ Azure Key Vault is an Azure-native service for managing secrets, keys, and certi
 Key Vault stores secrets, cryptographic keys, and certificates behind Azure RBAC or vault access policies. Applications should access Key Vault using managed identity, not hard-coded client secrets. Soft delete and purge protection protect against accidental or malicious deletion. Diagnostic logs record secret reads, writes, and administrative operations.
 
 Use separate vaults by environment or application boundary, enable private endpoints for sensitive workloads, and automate certificate/secret rotation.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  APP[App with Managed Identity] --> KV[Key Vault]
+  KV --> SEC[Secrets]
+  KV --> KEY[Keys]
+  KV --> CERT[Certificates]
+  KV --> LOG[Diagnostic Logs]
+```
+
+Practical lab: create a vault, enable purge protection, add a secret, enable managed identity on an app, grant RBAC access, and read the secret without storing credentials.

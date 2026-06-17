@@ -94,3 +94,21 @@ Use service connections with workload identity federation when possible, protect
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+sequenceDiagram
+  participant Dev as Developer
+  participant Repo as Azure Repos
+  participant Pipe as Azure Pipelines
+  participant Env as Environment Approval
+  participant App as Azure App
+  Dev->>Repo: Pull request
+  Repo->>Pipe: Build and test
+  Pipe->>Env: Request approval
+  Env->>Pipe: Approved
+  Pipe->>App: Deploy artifact
+```
+
+Practical lab: create a YAML pipeline, build an artifact, publish it, deploy to a dev environment, add a manual approval, then deploy to production.

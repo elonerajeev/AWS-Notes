@@ -23,3 +23,15 @@ Azure Private Endpoint maps a private IP address from your VNet to a supported A
 - Avoid manually overriding DNS unless you understand the full resolution path.
 - Validate access before disabling public network access.
 - Monitor denied connections and DNS resolution failures during migrations.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  APP[App Subnet] --> PE[Private Endpoint IP]
+  PE --> PLS[Azure PaaS Service]
+  DNS[Private DNS Zone] --> PE
+  APP --> DNS
+```
+
+Practical lab: create a Storage account private endpoint, link the private DNS zone, disable public access, and verify access from a VM in the VNet.

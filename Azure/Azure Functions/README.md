@@ -94,3 +94,16 @@ Design functions to be idempotent, short-running, observable, and retry-safe. Us
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+flowchart LR
+  EVT[HTTP / Timer / Queue / Event Grid] --> FN[Azure Function]
+  FN --> MI[Managed Identity]
+  MI --> KV[Key Vault]
+  FN --> OUT[Storage / Service Bus / Cosmos DB]
+  FN --> AI[Application Insights]
+```
+
+Practical lab: create an HTTP-triggered function, add an app setting, enable managed identity, write a secret to Key Vault, read it from the function, and inspect traces in Application Insights.

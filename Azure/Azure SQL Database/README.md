@@ -94,3 +94,16 @@ Secure production databases with Microsoft Entra authentication, private endpoin
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+flowchart LR
+  APP[Application] --> PE[Private Endpoint]
+  PE --> SQL[(Azure SQL Database)]
+  SQL --> BAK[Automatic Backups]
+  SQL --> MON[Query Performance Insight / Azure Monitor]
+  APP --> KV[Key Vault for connection settings]
+```
+
+Practical lab: create a database, configure firewall or private endpoint, create a least-privilege user, load sample data, enable auditing, and test point-in-time restore.

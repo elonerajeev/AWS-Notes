@@ -18,3 +18,16 @@ This guide mirrors the AWS EC2 ELK lab using Azure Virtual Machines. Azure-nativ
 - Enable disk encryption and backups for important data.
 - Size disks and memory for indexing workload.
 - Consider Azure Monitor or Elastic Cloud for production managed operations.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  VM[Azure VM] --> ES[Elasticsearch]
+  VM --> LS[Logstash]
+  VM --> KB[Kibana]
+  APP[Apps / Beats] --> LS
+  KB --> ADMIN[Admin via Bastion/VPN]
+```
+
+Practical lab: deploy an Ubuntu VM, restrict NSG access, install ELK components, ship sample logs, and view them in Kibana.

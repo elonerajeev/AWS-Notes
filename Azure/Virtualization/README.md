@@ -28,3 +28,16 @@ Virtualization is the foundation for cloud compute. Azure abstracts physical har
 Azure virtualization is not only VMs. It includes VM Scale Sets for fleets, App Service for managed web hosting, Functions for event-driven code, Container Apps for serverless containers, AKS for Kubernetes, and Azure Arc for extending Azure management outside Azure.
 
 Pick the least operationally complex platform that meets the requirement. If you only need to run code on HTTP events, avoid a VM. If you need OS-level control, choose a VM. If you need Kubernetes APIs and ecosystem control, choose AKS.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart TD
+  REQ[Workload Requirement] --> VM[Virtual Machines]
+  REQ --> APP[App Service]
+  REQ --> FN[Functions]
+  REQ --> ACA[Container Apps]
+  REQ --> AKS[AKS]
+```
+
+Practical lab: classify five sample workloads and choose VM, App Service, Functions, Container Apps, or AKS based on control, scale, runtime, and operations needs.

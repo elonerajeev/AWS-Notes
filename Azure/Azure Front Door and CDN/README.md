@@ -94,3 +94,15 @@ Production designs should use custom domains, managed certificates, WAF managed 
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  USER[Global Users] --> AFD[Azure Front Door + WAF]
+  AFD --> OR1[Origin: App Service]
+  AFD --> OR2[Origin: Storage Static Site]
+  AFD --> MON[Access Logs / Azure Monitor]
+```
+
+Practical lab: create Front Door, add two origins, configure a route and WAF policy, enable caching for static assets, and test origin failover.

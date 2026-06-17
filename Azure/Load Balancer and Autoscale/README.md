@@ -94,3 +94,16 @@ Always configure meaningful health probes, backend pools, TLS strategy, WAF poli
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  USER[Users] --> LB[Load Balancer / App Gateway]
+  LB --> POOL[Backend Pool]
+  POOL --> VMSS[VM Scale Set]
+  VMSS --> AS[Autoscale Rules]
+  LB --> HP[Health Probe]
+```
+
+Practical lab: create a VM Scale Set, place it behind a load balancer, configure health probes, add CPU autoscale, and test instance scale-out.

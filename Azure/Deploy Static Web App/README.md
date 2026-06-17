@@ -32,3 +32,16 @@ az storage blob upload-batch --account-name <unique-storage-name> --destination 
 For static websites, choose Azure Static Web Apps when you want Git-based deployment, preview environments, auth, and optional Functions APIs. Choose Storage static website hosting when you only need simple file hosting and want to place Azure Front Door or CDN in front.
 
 A production static site should include custom domain, managed TLS, cache-control headers, compression through Front Door/CDN, security headers, and a pipeline that builds and publishes artifacts consistently.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  DEV[Developer] --> REPO[GitHub Repo]
+  REPO --> ACT[GitHub Actions]
+  ACT --> SWA[Static Web Apps]
+  SWA --> CDN[Global Edge + TLS]
+  SWA --> API[Optional Functions API]
+```
+
+Practical lab: deploy a static app from GitHub, add a preview environment through a pull request, configure route fallback, and bind a custom domain.

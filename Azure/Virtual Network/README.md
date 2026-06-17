@@ -94,3 +94,17 @@ Plan CIDR ranges carefully because overlapping address space blocks peering and 
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+flowchart TD
+  HUB[Hub VNet] --> FW[Azure Firewall]
+  HUB --> DNS[Private DNS Resolver]
+  HUB <--> APP[App Spoke VNet]
+  HUB <--> DATA[Data Spoke VNet]
+  APP --> PE[Private Endpoint]
+  DATA --> DB[(Database Private Endpoint)]
+```
+
+Practical lab: create two VNets, peer them, add NSGs, deploy a test VM, create a private endpoint to Storage, link private DNS, and verify private name resolution from the VM.

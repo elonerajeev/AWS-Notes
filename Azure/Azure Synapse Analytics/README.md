@@ -30,3 +30,16 @@ Azure Synapse Analytics is the Azure service family most commonly mapped to Amaz
 Synapse combines data warehouse, lake querying, Spark, and pipelines in one analytics workspace. A typical platform stores raw and curated files in Azure Data Lake Storage, queries ad hoc files with serverless SQL, processes big data with Spark, and serves modeled data through dedicated SQL pools or Power BI.
 
 Design Synapse around data zones, identity, network isolation, workspace managed identity, private endpoints, cost controls, and workload separation. Dedicated SQL pools should be paused when unused; serverless SQL costs should be controlled with partitioned data and efficient file formats like Parquet.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  SRC[Data Sources] --> ADF[Data Factory / Pipelines]
+  ADF --> DL[Data Lake Storage]
+  DL --> SQL[Serverless SQL]
+  DL --> SPARK[Spark Pool]
+  SQL --> BI[Power BI]
+```
+
+Practical lab: land CSV/Parquet data in Data Lake Storage, query it with serverless SQL, transform with Spark or pipelines, and publish a Power BI dataset.

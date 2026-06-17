@@ -22,3 +22,15 @@ Azure network flow logs capture IP traffic metadata for network security groups 
 - Use tags to identify log ownership.
 - Combine flow logs with NSG rules, effective routes, DNS logs, and application logs.
 - Alert on unusual traffic patterns for critical workloads.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  VM[VM Traffic] --> NSG[NSG / VNet Flow Logs]
+  NSG --> ST[Storage Account]
+  NSG --> LA[Log Analytics / Traffic Analytics]
+  LA --> WB[Workbook / Investigation]
+```
+
+Practical lab: enable flow logs, generate traffic between test VMs, query allowed and denied flows, and build a workbook for top talkers.

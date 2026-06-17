@@ -50,6 +50,18 @@ Each guide now explains the Azure service as its own topic first: what the servi
 - [Install Nagios on an Azure VM](./INSTALL-TOOLS/nagios.md) — Azure VM version of the Nagios lab.
 - [Azure Key Vault](./Key%20Vault/README.md) — Azure-specific secrets, keys, and certificates guidance.
 
+## Architecture, workflow, and practical service additions
+
+- [Architecture and Workflow Playbook](./ARCHITECTURE_AND_WORKFLOWS.md) — visual Mermaid diagrams for landing zones, web apps, networking, CI/CD, and analytics.
+- [Azure Policy and Governance](./Azure%20Policy/README.md)
+- [Microsoft Defender for Cloud and Sentinel](./Microsoft%20Defender%20and%20Sentinel/README.md)
+- [Azure Backup and Site Recovery](./Azure%20Backup%20and%20Site%20Recovery/README.md)
+- [Azure Container Registry](./Azure%20Container%20Registry/README.md)
+- [Azure Logic Apps](./Azure%20Logic%20Apps/README.md)
+- [Azure Data Factory](./Azure%20Data%20Factory/README.md)
+- [Azure App Configuration](./Azure%20App%20Configuration/README.md)
+- [Azure Cache for Redis](./Azure%20Cache%20for%20Redis/README.md)
+
 ## Azure governance checklist
 
 - Create a tenant and subscriptions that match your organization, billing, and environment boundaries.

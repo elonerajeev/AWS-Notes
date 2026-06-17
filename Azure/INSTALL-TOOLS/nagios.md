@@ -17,3 +17,15 @@ Nagios can monitor servers and services running on Azure VMs, on-premises system
 - Back up Nagios configuration files.
 - Use managed identities and Azure automation for Azure-specific checks where possible.
 - Compare Nagios coverage with Azure Monitor alerts to avoid duplicate noise.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  ADMIN[Admin via Bastion/VPN] --> NAG[Nagios on Azure VM]
+  NAG --> VM1[Azure VM Checks]
+  NAG --> WEB[HTTP Checks]
+  NAG --> ALERT[Email / Webhook Alerts]
+```
+
+Practical lab: install Nagios on a VM, add monitored hosts, configure service checks, restrict UI access, and test an alert.

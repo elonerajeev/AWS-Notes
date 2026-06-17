@@ -34,6 +34,14 @@ Use this mapping to translate the original AWS notes into Azure terminology and 
 | SNS | Azure Service Bus topics / Event Grid |
 | SES | Azure Communication Services Email |
 | Redshift | Azure Synapse Analytics |
+| ECR | Azure Container Registry |
+| Step Functions | Azure Logic Apps / Durable Functions |
+| AWS Backup | Azure Backup |
+| AWS Config / Organizations SCPs | Azure Policy |
+| GuardDuty / Security Hub | Microsoft Defender for Cloud / Microsoft Sentinel |
+| ElastiCache | Azure Cache for Redis |
+| Glue | Azure Data Factory / Synapse pipelines |
+| AppConfig | Azure App Configuration |
 
 ## Migration mindset
 

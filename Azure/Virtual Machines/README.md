@@ -94,3 +94,17 @@ Typical workflow: create a resource group, VNet, subnet, NSG, VM, managed identi
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Practical architecture diagram
+
+```mermaid
+flowchart TD
+  VNET[VNet/Subnet] --> NIC[Network Interface]
+  NIC --> VM[Virtual Machine]
+  VM --> OSD[OS Disk]
+  VM --> DD[Data Disks]
+  VM --> MI[Managed Identity]
+  VM --> MON[Azure Monitor + Backup]
+```
+
+Practical lab: deploy a Linux VM with SSH keys, attach a data disk, enable managed identity, install a web server through cloud-init, enable backup, and connect through Bastion.

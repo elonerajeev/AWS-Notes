@@ -94,3 +94,15 @@ Important record types include A, AAAA, CNAME, MX, TXT, NS, SRV, and alias recor
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Practical architecture diagram
+
+```mermaid
+flowchart TD
+  REG[Domain Registrar] --> NS[Azure DNS Nameservers]
+  NS --> ZONE[Public DNS Zone]
+  VNET[VNet] --> PZONE[Private DNS Zone]
+  PZONE --> PE[Private Endpoint Records]
+```
+
+Practical lab: create a public DNS zone, add an A/CNAME/TXT record, delegate from your registrar, then create a private DNS zone for a private endpoint.

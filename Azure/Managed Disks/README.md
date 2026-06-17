@@ -94,3 +94,15 @@ Choose Standard SSD for dev/test and general workloads, Premium SSD for producti
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Practical architecture diagram
+
+```mermaid
+flowchart TD
+  VM[Virtual Machine] --> OS[OS Managed Disk]
+  VM --> D1[Data Disk]
+  D1 --> SNAP[Snapshot]
+  SNAP --> NEW[New Disk / Restore]
+```
+
+Practical lab: attach a data disk to a VM, initialize it in the OS, create a snapshot, restore it as a new disk, and compare disk performance tiers.

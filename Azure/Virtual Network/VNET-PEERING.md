@@ -23,3 +23,14 @@ Azure VNet peering connects two virtual networks so resources can communicate ov
 - Keep peering permissions limited with Azure RBAC.
 - Document traffic flows before enabling forwarded traffic.
 - Use Azure Network Watcher to troubleshoot effective routes and connection issues.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  HUB[Hub VNet] <--> SPOKE1[Spoke VNet 1]
+  HUB <--> SPOKE2[Spoke VNet 2]
+  HUB --> FW[Firewall / Gateway]
+```
+
+Practical lab: create two VNets, peer them in both directions, test private IP connectivity, review effective routes, and document whether gateway transit is enabled.

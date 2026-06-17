@@ -94,3 +94,17 @@ A strong AKS baseline enables Azure Monitor Container Insights, Microsoft Defend
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+flowchart LR
+  Dev[Developer] --> ACR[Azure Container Registry]
+  ACR --> AKS[AKS Cluster]
+  AKS --> NP[Node Pools]
+  AKS --> ING[Ingress Controller]
+  ING --> SVC[Services and Pods]
+  SVC --> MON[Container Insights]
+```
+
+Practical lab: build an image, push it to ACR, attach ACR to AKS, deploy a Kubernetes manifest, expose it through ingress, then review pod logs and Container Insights.

@@ -94,3 +94,16 @@ Start with service health alerts, critical metric alerts, application failure al
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+flowchart LR
+  RES[Azure Resources] --> DS[Diagnostic Settings]
+  DS --> LAW[Log Analytics Workspace]
+  APP[Applications] --> AI[Application Insights]
+  LAW --> ALERT[Alerts and Workbooks]
+  AI --> ALERT
+```
+
+Practical lab: enable diagnostic settings for one resource, send logs to Log Analytics, run a KQL query, create an alert rule, and build a workbook visualization.

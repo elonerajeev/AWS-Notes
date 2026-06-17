@@ -30,3 +30,16 @@ WordPress on Azure can run on Azure App Service, Virtual Machines, AKS, or marke
 WordPress on Azure needs web compute, MySQL-compatible database, persistent media storage, backups, TLS, and caching. The easiest path is WordPress on App Service with Azure Database for MySQL Flexible Server. For larger sites, add Azure Front Door/CDN, WAF, object storage for media, and staging slots.
 
 Operational success depends on updates, plugin hygiene, database backups, file backups, admin MFA, least-privilege access, and performance monitoring.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  USER[Visitors] --> FD[Front Door / CDN]
+  FD --> WP[WordPress on App Service]
+  WP --> MYSQL[(MySQL Flexible Server)]
+  WP --> ST[Storage for Media / Backups]
+  WP --> MON[Application Insights]
+```
+
+Practical lab: create WordPress on App Service, connect MySQL, configure custom domain/TLS, enable backups, and add CDN or Front Door caching.

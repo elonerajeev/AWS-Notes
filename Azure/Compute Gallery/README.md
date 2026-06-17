@@ -94,3 +94,15 @@ Use Azure Image Builder or a CI pipeline to create images repeatedly. Keep image
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  SRC[Base VM / Image Builder] --> IMG[Image Definition]
+  IMG --> VER[Image Version]
+  VER --> REG[Regional Replication]
+  REG --> VM[VMs / VM Scale Sets]
+```
+
+Practical lab: build a golden image, publish an image version, replicate it to another region, and deploy a VM Scale Set from the versioned image.

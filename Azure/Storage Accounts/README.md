@@ -94,3 +94,17 @@ For production, disable anonymous access unless required, enable soft delete and
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+flowchart LR
+  APP[Application] --> ID[Managed Identity]
+  ID --> RBAC[Storage RBAC Role]
+  RBAC --> SA[Storage Account]
+  SA --> BLOB[Blob Containers]
+  SA --> FILE[Azure Files]
+  SA --> LIFE[Lifecycle Rules]
+```
+
+Practical lab: create a storage account, create a private container, upload a file with AzCopy or CLI, enable soft delete/versioning, add a lifecycle rule, and test RBAC access.

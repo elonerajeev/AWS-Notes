@@ -94,3 +94,16 @@ Use Azure Container Registry for private images, managed identity for pulls and 
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  ACR[Container Registry] --> ACA[Container Apps]
+  ACA --> REV[Revisions]
+  ACA --> SCALE[KEDA Scale Rules]
+  ACA --> LOG[Log Analytics]
+  JOB[Container Apps Jobs] --> LOG
+```
+
+Practical lab: push an image to ACR, deploy it to Container Apps, enable HTTP ingress, add a queue-based scale rule, create a new revision, and shift traffic gradually.

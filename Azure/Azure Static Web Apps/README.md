@@ -203,3 +203,17 @@ az webapp deployment slot swap \
 - Use deployment slots for App Service production releases.
 - Enable HTTPS-only, managed identity, Application Insights, and alerts.
 - Use Azure Front Door with WAF for internet-facing production apps that need global routing and protection.
+
+## 10. Architecture workflow
+
+```mermaid
+flowchart LR
+  DEV[Developer] --> GH[GitHub / Azure DevOps]
+  GH --> BUILD[Build Workflow]
+  BUILD --> SWA[Static Web Apps]
+  SWA --> FUNC[Optional Functions API]
+  SWA --> DOM[Custom Domain + TLS]
+  SWA --> AI[Monitoring]
+```
+
+Practical lab: deploy a Vite or React app, add `staticwebapp.config.json`, protect an `/admin` route, add an API function, configure a custom domain, and validate logs.

@@ -94,3 +94,16 @@ Choose based on delivery guarantees and consumer model: queue for one consumer, 
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  PUB[Publisher] --> SB[Service Bus Queue/Topic]
+  SB --> CON[Consumers]
+  EVT[Azure Resource Event] --> EG[Event Grid]
+  EG --> FUNC[Function / Logic App]
+  STREAM[Telemetry] --> EH[Event Hubs]
+```
+
+Practical lab: create a Service Bus queue, send messages, process them with a Function, test dead-letter behavior, then compare the same event flow with Event Grid.

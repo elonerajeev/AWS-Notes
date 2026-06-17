@@ -94,3 +94,16 @@ A good Azure environment uses groups for role assignments, PIM for privileged ac
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+flowchart TD
+  USER[Users and Groups] --> RBAC[Azure RBAC]
+  APP[App Registration] --> SP[Service Principal]
+  RES[Azure Resource] --> MI[Managed Identity]
+  RBAC --> SUB[Subscription / RG / Resource]
+  MI --> KV[Key Vault / Data Services]
+```
+
+Practical lab: create a group, assign Reader on a resource group, enable managed identity on a web app or VM, grant it Key Vault access, and verify access without storing a password.

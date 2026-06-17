@@ -94,3 +94,17 @@ Before building, decide naming standards, regions, tags, RBAC groups, budgets, p
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Practical architecture diagram
+
+```mermaid
+flowchart TD
+  TEN[Tenant] --> MG[Management Groups]
+  MG --> SUB[Subscriptions]
+  SUB --> RG[Resource Groups]
+  RG --> RES[Resources]
+  SUB --> POL[Policy]
+  SUB --> COST[Budgets]
+```
+
+Practical lab: create a resource group, apply tags, deploy a storage account, review the activity log, create a budget, and clean up the resource group.

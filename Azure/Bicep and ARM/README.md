@@ -94,3 +94,16 @@ Never hard-code secrets in templates. Use Key Vault, secure parameters, managed 
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+flowchart LR
+  DEV[Bicep Modules] --> VAL[Validate / What-if]
+  VAL --> DEP[Deployment]
+  DEP --> RG[Resource Group]
+  RG --> OUT[Outputs]
+  OUT --> PIPE[Pipeline Variables]
+```
+
+Practical lab: create a Bicep file for a storage account, run `az deployment group what-if`, deploy it, output the endpoint, and add the deployment to CI.

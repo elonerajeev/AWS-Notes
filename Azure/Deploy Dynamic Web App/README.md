@@ -32,3 +32,16 @@ A dynamic Azure web application typically combines **App Service**, **Azure SQL 
 A dynamic Azure web app usually has compute, database, identity, secrets, networking, and observability. App Service is the simplest managed platform for web apps and APIs. Container Apps is good for containerized APIs/workers. AKS is best when the team needs Kubernetes control.
 
 Use managed identity from the app to Key Vault and databases where possible. Keep production databases private, enable backups, use deployment slots or revisions for safe releases, and monitor requests, failures, dependencies, and latency.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  USER[Users] --> FD[Front Door / App Gateway]
+  FD --> APP[App Service / Container Apps]
+  APP --> KV[Key Vault]
+  APP --> DB[(Azure SQL / PostgreSQL)]
+  APP --> AI[Application Insights]
+```
+
+Practical lab: deploy app code to a staging slot, connect to a managed database, reference secrets from Key Vault, enable Application Insights, then swap to production.

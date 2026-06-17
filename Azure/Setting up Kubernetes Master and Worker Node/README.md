@@ -31,3 +31,17 @@ AKS is recommended for most Azure Kubernetes workloads, but learning a self-mana
 A self-managed Kubernetes cluster on Azure VMs teaches control plane, kubelet, CNI, container runtime, and node communication. However, you own upgrades, backups, etcd health, certificates, security hardening, and node patching.
 
 Use this only as a learning lab unless there is a strong production reason. For production, AKS removes much of the control-plane operations burden and integrates directly with Azure Monitor, Azure CNI, managed identities, Key Vault, Defender, and autoscaling.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart TD
+  CP[Control Plane VM] --> W1[Worker VM 1]
+  CP --> W2[Worker VM 2]
+  CP --> CNI[CNI Plugin]
+  W1 --> PODS[Pods]
+  W2 --> PODS
+  LB[Azure Load Balancer] --> PODS
+```
+
+Practical lab: create three Ubuntu VMs, initialize kubeadm on the control plane, join workers, install CNI, deploy NGINX, and expose it with a service.

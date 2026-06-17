@@ -94,3 +94,16 @@ Use autoscale or serverless for variable workloads, TTL for automatic cleanup, i
 - [Azure architecture center](https://learn.microsoft.com/azure/architecture/)
 - [Azure well-architected framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure CLI documentation](https://learn.microsoft.com/cli/azure/)
+
+## Architecture workflow
+
+```mermaid
+flowchart LR
+  APP[Application] --> SDK[Cosmos DB SDK]
+  SDK --> C[(Container with Partition Key)]
+  C --> RU[Request Units]
+  C --> IDX[Indexing Policy]
+  C --> REP[Regional Replication]
+```
+
+Practical lab: create a NoSQL account, choose a partition key, insert sample documents, query by partition key, review RU charge, and add an autoscale throughput setting.

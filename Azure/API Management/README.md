@@ -29,3 +29,15 @@ Azure API Management is the Azure counterpart to Amazon API Gateway for publishi
 API Management sits between clients and backend APIs. It centralizes authentication, authorization checks, throttling, quotas, transformation, versioning, developer onboarding, and API analytics. APIs are grouped into products, and policies apply at global, product, API, operation, or backend scopes.
 
 Use it when multiple teams or clients consume APIs and you need consistent governance. For private APIs, deploy APIM with VNet integration and route to private App Service, AKS, Functions, or internal endpoints.
+
+## Practical architecture diagram
+
+```mermaid
+flowchart LR
+  CLIENT[Clients] --> APIM[API Management]
+  APIM --> POL[Policies: Auth / Rate Limit / Transform]
+  POL --> BACK[Functions / App Service / AKS]
+  APIM --> MON[Azure Monitor]
+```
+
+Practical lab: import an OpenAPI spec, add JWT validation, set a rate-limit policy, publish the API in a product, and review request metrics.
